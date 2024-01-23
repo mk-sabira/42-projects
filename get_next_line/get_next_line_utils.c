@@ -6,13 +6,13 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:51:02 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/01/21 12:51:19 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:56:07 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int strlen(char *str)
+int	strlen(char *str)
 {
-    
+	int	i;
 }

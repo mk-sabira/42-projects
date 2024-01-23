@@ -6,13 +6,13 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:47:03 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/01/21 12:51:35 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:56:21 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    
+	fd = 0;
 }
