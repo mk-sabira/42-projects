@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:48:41 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/01/25 13:57:08 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:01:33 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define BUFFER_SIZE 3
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 3
+# endif
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strrchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
 
 #endif

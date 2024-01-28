@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:51:02 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/01/25 13:21:11 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:01:15 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ size_t	ft_strlen(const char *str)
 		i++;
 	}
 	return (i);
+}
+
+char	*ft_strrchr(const char *s, int c)
+{
+	const char	*end;
+
+	end = 0;
+	while (*s)
+	{
+		if (*s == (char) c)
+			end = s;
+		s++;
+	}
+	if (*s == (char) c)
+		return ((char *)s);
+	else
+		return ((char *)end);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
