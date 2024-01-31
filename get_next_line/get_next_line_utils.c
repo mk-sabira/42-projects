@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:51:02 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/01/29 10:22:45 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:12:45 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (*s2)
 		ptr[i++] = *(s2)++;
 	ptr[i] = '\0';
+	// free(ptr);
 	return (ptr);
 }

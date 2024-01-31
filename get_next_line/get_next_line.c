@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:47:03 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/01/29 12:33:14 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:15:21 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ char	*ft_read_line(int fd, char *left_str)
 	while (!ft_strchr(left_str, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, tmp, BUFFER_SIZE);
+		// printf("bytes_read: %zd\n", bytes_read);
 		if (bytes_read == -1)
 			return (free (tmp), NULL);
 		tmp[bytes_read] = '\0';
+		// printf("tmp: %s\n", tmp);
 		left_str = ft_strjoin(left_str, tmp);
+		// printf("left_str: %s\n", left_str);
 		if (!left_str)
 			return (free(tmp), free(left_str), NULL);
 	}
 	free(tmp);
+	// printf("left_str: %s\n", left_str);
 	if (bytes_read == 0 && left_str[0] == '\0' )
 		return (free(left_str), NULL);
 	return (left_str);
@@ -70,22 +74,12 @@ char	*ft_left_line(char *left_line)
 	return (str);
 }
 
-char	*get_next_line(int fd)
+char	*ft_get_rest(char *left_line)
 {
-	char		*full_line;
-	static char	*left_line;
-	int i;
-	int j;
-	char *str;
+	int		i;	
+	int		j;
+	char	*str;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
-		return (NULL);
-	left_line = ft_read_line(fd, left_line);
-	if (!left_line)
-		return (NULL);
-	full_line = ft_left_line(left_line);
-	// if (full_line == 0)
-	// 	return (NULL);
 	i = 0;
 	while (left_line[i] && left_line[i] != '\n')
 		i++;
@@ -99,26 +93,40 @@ char	*get_next_line(int fd)
 		return (NULL);
 	i++;
 	j = 0;
-	while (left_line[i])
+	while (left_line[i] != 0)
 	{
 		str[j++] = left_line[i++];
+		// printf("...str:%s\n...left_line:%s", str, left_line);
 	}
 	str[j] = '\0';
-	left_line = str;
-	if (left_line == NULL)
+	free(left_line);
+	return (str);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*full_line;
+	static char	*left_line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
+	left_line = ft_read_line(fd, left_line);
+	// printf("left_line: %s\n", left_line);
+	if (!left_line)
+		return (NULL);
+	full_line = ft_left_line(left_line);
+	left_line = ft_get_rest(left_line);
 	return (full_line);
 }
 
 // int	main(void)
 // {
 // 	int		fd;
-// 	// char	*line;
-// 	fd = open("test.txt", O_RDONLY);
-	
-// 	printf("get_next_line1: %s", get_next_line(fd));
-// 	printf("get_next_line2: %s", get_next_line(fd));
 
+// 	fd = open("test.txt", O_RDONLY);
+// 	printf("get_next_line1: %s", get_next_line(fd));
+// 	// printf("get_next_line2: %s", get_next_line(fd));
+// 	// printf("get_next_line3: %s", get_next_line(fd));
 // 	close(fd);
 // 	return (0);
 // }
