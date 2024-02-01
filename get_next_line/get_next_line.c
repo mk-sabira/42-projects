@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:47:03 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/01/31 19:15:21 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:28:33 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ char	*ft_read_line(int fd, char *left_str)
 	ssize_t	bytes_read;
 
 	if (left_str == NULL)
-		left_str = "";
+	{
+		left_str = malloc(1);
+		left_str[0] = '\0';
+		// left_str = "";
+	}
 	bytes_read = 1;
 	if (fd < 0 || left_str == NULL)
 		return (NULL);
@@ -28,20 +32,32 @@ char	*ft_read_line(int fd, char *left_str)
 	while (!ft_strchr(left_str, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, tmp, BUFFER_SIZE);
-		// printf("bytes_read: %zd\n", bytes_read);
 		if (bytes_read == -1)
-			return (free (tmp), NULL);
+		{
+			free (tmp);
+			tmp = NULL;
+			return (NULL);
+		}
 		tmp[bytes_read] = '\0';
-		// printf("tmp: %s\n", tmp);
 		left_str = ft_strjoin(left_str, tmp);
-		// printf("left_str: %s\n", left_str);
 		if (!left_str)
-			return (free(tmp), free(left_str), NULL);
+		{
+			free(tmp);
+			tmp = NULL;
+			free(left_str);
+			left_str = NULL;
+			return (NULL);
+		}
 	}
 	free(tmp);
-	// printf("left_str: %s\n", left_str);
+	tmp = NULL;
 	if (bytes_read == 0 && left_str[0] == '\0' )
-		return (free(left_str), NULL);
+	{
+		free(left_str);
+		left_str = NULL;
+		return (NULL);
+	}
+		// return (free(left_str), NULL);
 	return (left_str);
 }
 
@@ -86,6 +102,7 @@ char	*ft_get_rest(char *left_line)
 	if (!left_line[i])
 	{
 		free(left_line);
+		left_line = NULL;
 		return (NULL);
 	}
 	str = (char *) malloc(sizeof(char) * (ft_strlen(left_line) - i + 1));
@@ -96,10 +113,10 @@ char	*ft_get_rest(char *left_line)
 	while (left_line[i] != 0)
 	{
 		str[j++] = left_line[i++];
-		// printf("...str:%s\n...left_line:%s", str, left_line);
 	}
 	str[j] = '\0';
 	free(left_line);
+	left_line = NULL;
 	return (str);
 }
 
@@ -111,7 +128,6 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
 	left_line = ft_read_line(fd, left_line);
-	// printf("left_line: %s\n", left_line);
 	if (!left_line)
 		return (NULL);
 	full_line = ft_left_line(left_line);
@@ -125,7 +141,7 @@ char	*get_next_line(int fd)
 
 // 	fd = open("test.txt", O_RDONLY);
 // 	printf("get_next_line1: %s", get_next_line(fd));
-// 	// printf("get_next_line2: %s", get_next_line(fd));
+// 	printf("get_next_line2: %s", get_next_line(fd));
 // 	// printf("get_next_line3: %s", get_next_line(fd));
 // 	close(fd);
 // 	return (0);
