@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/05 09:29:15 by bmakhama          #+#    #+#             */
+/*   Updated: 2024/02/05 09:29:40 by bmakhama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(char *str)
@@ -18,8 +30,6 @@ char	*ft_strchr(char *s, int c)
 {
 	if (!s)
 		return (0);
-	// if (c == '\0')
-	// 	return ((char *)&s[ft_strlen(s)]);
 	while (*s != '\0' && *s != (char)c)
 		s++;
 	if (*s == (char) c)
@@ -32,8 +42,8 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ptr;
 	size_t	len;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	if ((!s1) || (!s2))
 		return (NULL);

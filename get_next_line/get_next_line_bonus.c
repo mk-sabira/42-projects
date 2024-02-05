@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/05 09:28:25 by bmakhama          #+#    #+#             */
+/*   Updated: 2024/02/05 09:49:09 by bmakhama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 char	*ft_read_line(int fd, char *left_str)
@@ -5,21 +17,22 @@ char	*ft_read_line(int fd, char *left_str)
 	char	*tmp;
 	ssize_t	bytes_read;
 
-	if (left_str == NULL)
+	if (!left_str)
 	{
 		left_str = malloc(1);
 		if (!left_str)
-        {
-            left_str = NULL;
+		{
+			free(left_str);
+			left_str = NULL;
 			return (NULL);
-        }
+		}
 		left_str[0] = '\0';
 	}
 	bytes_read = 1;
 	if (fd < 0 || left_str == NULL)
 		return (NULL);
 	tmp = (char *) malloc(BUFFER_SIZE + 1);
-	if (tmp == NULL)
+	if (!tmp)
 		return (NULL);
 	while (!ft_strchr(left_str, '\n') && bytes_read != 0)
 	{
@@ -66,7 +79,7 @@ char	*ft_left_line(char *left_line)
 		i++;
 	i++;
 	str = malloc(sizeof(char) * (i + 1));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	i = 0;
 	while (left_line[i] && left_line[i] != '\n' && left_line[i] != '\0')
@@ -99,7 +112,7 @@ char	*ft_get_rest(char *left_line)
 		return (NULL);
 	}
 	str = (char *) malloc(sizeof(char) * (ft_strlen(left_line) - i + 1));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	i++;
 	j = 0;
@@ -118,7 +131,7 @@ char	*get_next_line(int fd)
 	char		*full_line;
 	static char	*left_line[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	left_line[fd] = ft_read_line(fd, left_line[fd]);
 	if (!left_line[fd])

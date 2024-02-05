@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:51:02 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/02/01 14:29:31 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/02/05 10:55:11 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ptr;
 	size_t	len;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	if ((!s1) || (!s2))
 		return (NULL);
@@ -55,7 +55,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	ptr = (char *)malloc(sizeof(char) * len);
 	if (!ptr)
-		return (0);
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (s1[j])

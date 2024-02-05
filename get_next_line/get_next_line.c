@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:47:03 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/02/01 14:28:33 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:52:01 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,18 @@ char	*ft_read_line(int fd, char *left_str)
 		if (!left_str)
 			return (NULL);
 		left_str[0] = '\0';
+		// printf("---left_str\n %c", left_str[0]);
 	}
 	bytes_read = 1;
 	if (fd < 0 || left_str == NULL)
 		return (NULL);
 	tmp = (char *) malloc(BUFFER_SIZE + 1);
-	if (tmp == NULL)
+	if (!tmp)
+		return (NULL);
+	if (left_str == NULL)
 	{
+		free(left_str);
+		free(tmp);
 		return (NULL);
 	}
 	while (!ft_strchr(left_str, '\n') && bytes_read != 0)
@@ -45,6 +50,7 @@ char	*ft_read_line(int fd, char *left_str)
 		}
 		tmp[bytes_read] = '\0';
 		left_str = ft_strjoin(left_str, tmp);
+		// printf("''''''left_str: %s\n", left_str);
 		if (!left_str)
 		{
 			free(tmp);
@@ -56,7 +62,7 @@ char	*ft_read_line(int fd, char *left_str)
 	}
 	free(tmp);
 	tmp = NULL;
-	if (bytes_read == 0 && left_str[0] == '\0' )
+	if (bytes_read == 0 && left_str[0] == '\0')
 	{
 		free(left_str);
 		left_str = NULL;
@@ -73,6 +79,7 @@ char	*ft_left_line(char *left_line)
 	i = 0;
 	if (!left_line[i])
 		return (NULL);
+	// printf("---left_line: %s\n", left_line);
 	while (left_line[i] && left_line[i] != '\n' && left_line[i] != '\0')
 		i++;
 	i++;
@@ -101,6 +108,7 @@ char	*ft_get_rest(char *left_line)
 	char	*str;
 
 	i = 0;
+	// printf("ft_get_rest\n");
 	while (left_line[i] && left_line[i] != '\n')
 		i++;
 	if (!left_line[i])
@@ -115,9 +123,7 @@ char	*ft_get_rest(char *left_line)
 	i++;
 	j = 0;
 	while (left_line[i] != 0)
-	{
 		str[j++] = left_line[i++];
-	}
 	str[j] = '\0';
 	free(left_line);
 	left_line = NULL;
@@ -129,24 +135,31 @@ char	*get_next_line(int fd)
 	char		*full_line;
 	static char	*left_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+	// printf("get_next_line\n");
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	left_line = ft_read_line(fd, left_line);
 	if (!left_line)
+	{
+		// free(left_line);
 		return (NULL);
+	}
 	full_line = ft_left_line(left_line);
 	left_line = ft_get_rest(left_line);
 	return (full_line);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
+int	main(void)
+{
+	int		fd;
+	char	*str;
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	printf("get_next_line1: %s", get_next_line(fd));
-// 	printf("get_next_line2: %s", get_next_line(fd));
-// 	// printf("get_next_line3: %s", get_next_line(fd));
-// 	close(fd);
-// 	return (0);
-// }
+	str = get_next_line(12);
+	fd = open("test.txt", O_RDONLY);
+	printf("get_next_line1: %s", str);
+	free(str);
+	// printf("get_next_line2: %s", get_next_line(fd));
+	// printf("get_next_line3: %s", get_next_line(fd));
+	close(fd);
+	return (0);
+}
