@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 12:47:03 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/02/01 14:28:33 by bmakhama         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line_bonus.h"
 
 char	*ft_read_line(int fd, char *left_str)
@@ -21,7 +9,10 @@ char	*ft_read_line(int fd, char *left_str)
 	{
 		left_str = malloc(1);
 		if (!left_str)
+        {
+            left_str = NULL;
 			return (NULL);
+        }
 		left_str[0] = '\0';
 	}
 	bytes_read = 1;
@@ -29,9 +20,7 @@ char	*ft_read_line(int fd, char *left_str)
 		return (NULL);
 	tmp = (char *) malloc(BUFFER_SIZE + 1);
 	if (tmp == NULL)
-	{
 		return (NULL);
-	}
 	while (!ft_strchr(left_str, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, tmp, BUFFER_SIZE);
@@ -127,26 +116,44 @@ char	*ft_get_rest(char *left_line)
 char	*get_next_line(int fd)
 {
 	char		*full_line;
-	static char	*left_line;
+	static char	*left_line[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
-	left_line = ft_read_line(fd, left_line);
-	if (!left_line)
+	left_line[fd] = ft_read_line(fd, left_line[fd]);
+	if (!left_line[fd])
 		return (NULL);
-	full_line = ft_left_line(left_line);
-	left_line = ft_get_rest(left_line);
+	full_line = ft_left_line(left_line[fd]);
+	left_line[fd] = ft_get_rest(left_line[fd]);
 	return (full_line);
 }
-
 // int	main(void)
 // {
-// 	int		fd;
+// 	char	*line;
+// 	int		i;
+// 	int		fd1;
+// 	int		fd2;
+// 	int		fd3;
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	printf("get_next_line1: %s", get_next_line(fd));
-// 	printf("get_next_line2: %s", get_next_line(fd));
-// 	// printf("get_next_line3: %s", get_next_line(fd));
-// 	close(fd);
+// 	fd1 = open("tests/test.txt", O_RDONLY);
+// 	fd2 = open("tests/test2.txt", O_RDONLY);
+// 	fd3 = open("tests/test3.txt", O_RDONLY);
+// 	i = 1;
+// 	while (i < 7)
+// 	{
+// 		line = get_next_line(fd1);
+// 		printf("line [%02d]: %s", i, line);
+// 		free(line);
+// 		line = get_next_line(fd2);
+// 		printf("line [%02d]: %s", i, line);
+// 		free(line);
+// 		line = get_next_line(fd3);
+// 		printf("line [%02d]: %s", i, line);
+// 		free(line);
+// 		i++;
+// 	}
+// 	close(fd1);
+// 	close(fd2);
+// 	close(fd3);
 // 	return (0);
 // }
