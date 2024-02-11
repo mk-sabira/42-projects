@@ -6,11 +6,11 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 09:29:15 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/02/05 09:29:40 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:22:26 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *str)
 {
@@ -20,9 +20,7 @@ size_t	ft_strlen(char *str)
 	if (!str)
 		return (0);
 	while (str[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -53,7 +51,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	ptr = (char *)malloc(sizeof(char) * len);
 	if (!ptr)
-		return (0);
+		return (free(s1), NULL);
 	i = 0;
 	j = 0;
 	while (s1[j])
@@ -61,7 +59,5 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (*s2)
 		ptr[i++] = *(s2)++;
 	ptr[i] = '\0';
-	free(s1);
-	s1 = NULL;
-	return (ptr);
+	return (free(s1), ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:51:02 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/02/05 10:55:11 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:12:55 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ size_t	ft_strlen(char *str)
 	if (!str)
 		return (0);
 	while (str[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -30,8 +28,6 @@ char	*ft_strchr(char *s, int c)
 {
 	if (!s)
 		return (0);
-	// if (c == '\0')
-	// 	return ((char *)&s[ft_strlen(s)]);
 	while (*s != '\0' && *s != (char)c)
 		s++;
 	if (*s == (char) c)
@@ -55,7 +51,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	ptr = (char *)malloc(sizeof(char) * len);
 	if (!ptr)
-		return (NULL);
+		return (free(s1), NULL);
 	i = 0;
 	j = 0;
 	while (s1[j])
@@ -63,7 +59,5 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (*s2)
 		ptr[i++] = *(s2)++;
 	ptr[i] = '\0';
-	free(s1);
-	s1 = NULL;
-	return (ptr);
+	return (free(s1), ptr);
 }
