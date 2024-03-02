@@ -1,0 +1,35 @@
+### Evaluation commands
+
+- **OS**
+    - `uname -v`
+- **Modify hostname**
+    - `sudo nano /etc/hostname`
+    - `sudo nano /etc/hosts`
+    
+    - `sudo reboot`cd
+- **user and group:**
+    - `getent group`
+    - `getent group <name of the group>`
+    - `cat  /etc/passwd # show all users`
+    - `sudo groupdel <name of group>`
+    - `sudo userdel <name of user>`
+- **sudo**
+    - Show the application of the rules imposed for sudo by the subject. → path → `/var/log/sudo` and `nano /etc/sudoers.d/sudo_config`
+    - `sudo nano hello42` and than check the log: `cat sudo_config`
+- **UFW**
+    - `sudo service ufw status` or `dpkg -s ufw`
+    - `sudo ufw status` `numbered`
+    - `sudo ufw delete <num_rule>`
+- **ssh**
+    - `which ssh`
+    - `sudo service ssh status`
+    - verify that using ssh with the root is not allowed: `ssh root@localhost -p 4242`, allowed with `ssh username@localhost -p 4242`
+- **Crontab**
+    - `sudo crontab -u root -e`
+    - `sudo /etc/init.d/cron stop`-> make the script stop running when the server has started, but without modifying the script
+    - `sudo /etc/init.d/cron start`
+- **password**
+    - `nano /etc/login.defs` - max_day
+    - `nano /etc/pam.d/common-password`
+    - `passwd -S <name of the username or root>`
+    - `sudo` `passwd -S <name of the username or root>`
