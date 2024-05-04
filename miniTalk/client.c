@@ -6,11 +6,43 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:50:18 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/05/02 13:17:23 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:21:38 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void	ft_error(void)
+{
+	ft_printf("Illegal PID");
+	exit(1);
+}
+
+pid_t	ft_handle_pid(char *str)
+{
+	int	has_sign;
+	int	i;
+	int	nb;
+
+	has_sign = 0;
+	if (str[0] == '\0' || str[0] == '+')
+		ft_error();
+	if (str[0] == '-')
+		has_sign = 1;
+	i = has_sign;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			ft_error();
+		if ((str[i] == '+' || str[i] == '-') && i > 0)
+			ft_error();
+		i++;
+	}
+	nb = ft_atoi(str);
+	if (nb == 0 || nb == -1)
+		ft_error();
+	return (nb);
+}
 
 void	ft_ascii_to_binary(char c, int binary[8])
 {
@@ -25,16 +57,19 @@ void	ft_ascii_to_binary(char c, int binary[8])
 		i--;
 	}
 }
-//SIGUSR1 = 0;
-//SIGUSR2 = 1;
+//SIGUSR1 = 0; SIGUSR2 = 1;
+
 void	ft_send_char(int server_pid, char c)
 {
-	int binary[8];
+	int	binary[8];
+	int	i;
+	int	signal_type;
+
 	ft_ascii_to_binary(c, binary);
-	int i = 0;
+	i = 0;
 	while (i < 8)
 	{
-		int signal_type = 0;
+		signal_type = 0;
 		if (binary[i] == 0)
 			signal_type = SIGUSR1;
 		else if (binary[i] == 1)
@@ -51,20 +86,15 @@ void	ft_send_char(int server_pid, char c)
 
 int	main(int arc, char **arv)
 {
-	pid_t server_pid;
+	pid_t	server_pid;
+	int		i;
 
 	if (arc == 3)
 	{
-		server_pid = ft_atoi(arv[1]);
-		if (server_pid <= 0)
-		{
-			ft_printf("\033[1;31mIncorrect PID");
-			return (1);
-		}
-		int	i;
-		
+		server_pid = ft_handle_pid(arv[1]);
+		ft_printf("ser PID:%d\n", server_pid);
 		i = 0;
-		while(arv[2][i] != '\0')
+		while (arv[2][i] != '\0')
 		{
 			ft_send_char(server_pid, arv[2][i]);
 			i++;

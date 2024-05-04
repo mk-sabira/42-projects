@@ -6,13 +6,13 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:34:07 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/05/02 12:48:24 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/05/04 16:36:18 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_printf_H
+#ifndef FT_PRINTF_H
 
-# define FT_printf_H
+# define FT_PRINTF_H
 
 # include <unistd.h>
 # include <stdarg.h>

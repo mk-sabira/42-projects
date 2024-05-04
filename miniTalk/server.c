@@ -6,13 +6,13 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:48:18 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/05/02 12:52:42 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:01:29 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void    ft_recieve_char (int sig_type)
+void	ft_recieve_char(int sig_type)
 {
 	static char	c;
 	static int	bit;
@@ -27,24 +27,24 @@ void    ft_recieve_char (int sig_type)
 		write (1, &c, 1);
 		c = 0;
 		bit = 0;
-	}      
+	}
 }
 
 int	main(void)
 {
-	struct sigaction signal_ac;
-	
+	struct sigaction	signal_ac;
+	pid_t				pid;
+
 	signal_ac.sa_handler = ft_recieve_char;
 	signal_ac.sa_flags = 0;
-
-	if (sigaction(SIGUSR1, &signal_ac, NULL) == -1 ||
+	sigemptyset(&signal_ac.sa_mask);
+	if (sigaction(SIGUSR1, &signal_ac, NULL) == -1 || \
 		sigaction(SIGUSR2, &signal_ac, NULL) == -1)
 	{
 		ft_printf ("\033[1;31mError registering signal handler");
 		return (1);
 	}
-
-	pid_t pid = getpid();
+	pid = getpid();
 	ft_printf("\033[94mServer PID\033[0m \033[96m->\033[0m %d\n", pid);
 	if (!pid)
 	{
