@@ -54,7 +54,7 @@ clean:
 	make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	make -C li$(LIBFT_DIR)bft fclean
+	make -C $(LIBFT_DIR) fclean
 	rm -rf $(NAME) $(BONUS_NAME)
 
 re: fclean all
