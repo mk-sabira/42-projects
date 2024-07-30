@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:29:29 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/07/25 11:16:24 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:58:35 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int arc, char **arv)
 			}
 		}
 	}
-	free_stack(&stack_a);
+	if (stack_a)
+		free_stack(&stack_a);
 	return (0);
 }

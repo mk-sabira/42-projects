@@ -1,23 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 09:30:40 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/07/26 11:51:36 by bmakhama         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include "./libft/libft.h"
-# include "stdio.h"
+# include "./get_next_line/get_next_line.h"
 
 typedef struct s_stack
 {

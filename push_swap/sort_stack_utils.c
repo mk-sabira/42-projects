@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:27:14 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/07/24 14:28:57 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:03:44 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_count_size(t_stack *stack)
 {
-	t_stack *current;
-	t_stack *start;
-	int     count;
+	t_stack	*current;
+	t_stack	*start;
+	int		count;
 
 	if (stack == NULL)
 		return (0);

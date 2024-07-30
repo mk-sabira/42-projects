@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:16:30 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/07/24 14:28:02 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:45:04 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_size(t_stack *stack)
 	current = stack;
 	start = stack;
 	count = 0;
-	while (current != start) 
+	while (current != start)
 	{
 		count++;
 		current = current->next;
@@ -33,7 +33,7 @@ int	get_size(t_stack *stack)
 	return (count);
 }
 
-void ft_swap(t_stack **stack)
+void	ft_swap(t_stack **stack)
 {
 	int	temp;
 

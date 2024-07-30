@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:12:41 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/07/24 14:16:29 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:58:09 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_rotate(t_stack **stack)
 	t_stack	*last;
 
 	if (*stack == NULL || (*stack)->next == *stack)
-		return ; 
+		return ;
 	first = *stack;
 	second = (*stack)->next;
 	last = first->prev;

@@ -6,7 +6,7 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:25:08 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/07/25 12:37:16 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:34:56 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	is_valid_nb(char *str)
 			return (0);
 		i++;
 	}
+	if (i > 11)
+		return (0);
 	return (1);
 }
 

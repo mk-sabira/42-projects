@@ -6,15 +6,15 @@
 /*   By: bmakhama <bmakhama@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:14:02 by bmakhama          #+#    #+#             */
-/*   Updated: 2024/07/24 15:46:13 by bmakhama         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:57:52 by bmakhama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_reverse_rotate(t_stack **stack) 
+void	ft_reverse_rotate(t_stack **stack)
 {
-	if (*stack == NULL || (*stack)->next == *stack) 
+	if (*stack == NULL || (*stack)->next == *stack)
 		return ;
 	*stack = (*stack)->prev;
 }
